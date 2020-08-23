@@ -1,98 +1,120 @@
 import java.util.Random;
-import java.util.TreeMap;
-import java.util.jar.JarOutputStream;
 
 public class game_match_3 {
-    public static int[][] mainarray = {{0, 6, 2, 2, 4},
-                                        {0, 1, 1, 1, 3},
-                                        {0, 1, 2, 4, 5},
-                                        {0, 2, 3, 4, 5},
-                                        {1, 1, 2, 2, 2},
-                                        {1, 1, 2, 2, 2}};
+    public static int[][] mainarray = {{12, 4,3,11,17},
+                                        {23, 1,3,17,27},
+                                        {24,13,57,21,37},
+                                        {15,3,57,97,47},
+                                        {36,13,57,87,57},
+                                        {2, 7,87,77,67},
+                                        {3, 4,87,77,67},
+                                        {36, 7,837,77,267},
+                                        {3, 7,87,7,67}};
 
     public static void main(String[] args) {
-        int integer=0;
+        int row = 9, column = 5;
+        int integer = 0;
         boolean same3 = true;
         Random random = new Random();
         while (same3) {
-            for (int i = 0; i < 5; i++) {//for checking if rows are same or not... if u have changed the size of array then
-                //do change the value of j till the size of colums-2
-                for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < column - 2; j++) {
                     integer = mainarray[i][j];
                     if (integer == mainarray[i][j + 1] && integer == mainarray[i][j + 2]) {
-                        if(i!=0) {
+                        if (i != 0) {
                             mainarray[i][j] = mainarray[i - 1][j];
                             mainarray[i][j + 1] = mainarray[i - 1][j + 1];
                             mainarray[i][j + 2] = mainarray[i - 1][j + 2];
+
+                            for (int r=i;r>0;r--){
+
+                                mainarray[r][j] = mainarray[r - 1][j];
+                                mainarray[r][j + 1] = mainarray[r - 1][j + 1];
+                                mainarray[r][j + 2] = mainarray[r - 1][j + 2];
+                            }
                         }
                         mainarray[0][j] = random.nextInt(6);
                         mainarray[0][j + 1] = random.nextInt(6);
                         mainarray[0][j + 2] = random.nextInt(6);
                         System.out.println("row int");
-                        same3=true;
-                        System.out.println("After Row showing ");
+                        same3 = true;
 
-                        for (int k = 0; k < 5; k++) {
-                            for (int g = 0; g < 5; g++) {
-                                System.out.print(mainarray[k][g] + " ");
+                    } /*else if (i!=row-1) {
+                        if (integer == mainarray[i][j + 1] && integer == mainarray[i + 1][j]) {
+                            if (i != 0 && i!=1) {
+                                mainarray[i][j] = mainarray[i - 2][j];
+                                mainarray[i][j + 1] = mainarray[i - 1][j + 1];
+                                mainarray[i+1][j] = mainarray[i - 1][j + 2];
+                            }else if(i==0){
+                                mainarray[0][j] = random.nextInt(6);
+                                mainarray[0][j + 1] = random.nextInt(6);
+                                mainarray[1][j] = random.nextInt(6);
+                            }else{//i=1
+                                mainarray[i+1][j]=mainarray[i-1][j];
+                                mainarray[i][j+1]=mainarray[i-1][j+1];
+                                mainarray[i][j]=random.nextInt(6);
                             }
-                            System.out.println();
+
+                            mainarray[1][j] = mainarray[0][j];
+                            mainarray[0][j] = random.nextInt(6);
+                            mainarray[0][j + 1] = random.nextInt(6);
+                            System.out.println("row adjacent int");
+                            same3 = true;
                         }
-                    }else
-                        same3=false;
+
+                    } */ //if you want adjacent checking too.. uncomment this like ((0,0),(0,1),(1,0))
+                    else
+                        same3 = false;
+
                 }
             }
 
-            for (int i = 0; i < 4; i++) {//for checking if columns are same or not... if u have changed the size of array then
-                //do change the value of i till the size of colums-2
-                for (int j = 0; j < 5; j++) {
+            for (int i = 0; i < row - 2; i++) {
+                for (int j = 0; j < column; j++) {
                     integer = mainarray[i][j];
-                    if (integer == mainarray[i+1][j] && integer == mainarray[i+2][j]) {
-                        if(i==0){
-                            mainarray[i][j]=random.nextInt(6);
-                            mainarray[i+1][j]=random.nextInt(6);
-                            mainarray[i+2][j]=random.nextInt(6);
-                        }else if (i==1){
-                            mainarray[i][j]=random.nextInt(6);
-                            mainarray[i+1][j]=random.nextInt(6);
-                            mainarray[i+2][j]=mainarray[i-1][j];
-                        }else if(i==2){
-                            mainarray[i][j]=random.nextInt(6);
-                            mainarray[i+1][j]=mainarray[i-2][j];
-                            mainarray[i+2][j]=mainarray[i-1][j];
-                        }
-                        else{
-                            mainarray[i][j]=mainarray[i-3][j];
-                            mainarray[i+1][j]=mainarray[i-2][j];
-                            mainarray[i+2][j]=mainarray[i-1][j];
-                            mainarray[0][j]=random.nextInt(6);
-                            mainarray[1][j]=random.nextInt(6);
-                            mainarray[2][j]=random.nextInt(6);
-                        }
-                        System.out.println("coloumn int");
-                        same3=true;
-                        System.out.println("After Coloumn showing ");
-
-                        for (int k = 0; k < 5; k++) {
-                            for (int g = 0; g < 5; g++) {
-                                System.out.print(mainarray[k][g] + " ");
+                    if (integer == mainarray[i + 1][j] && integer == mainarray[i + 2][j]) {
+                        if (i == 0) {
+                            mainarray[i][j] = random.nextInt(6);
+                            mainarray[i + 1][j] = random.nextInt(6);
+                            mainarray[i + 2][j] = random.nextInt(6);
+                        } else if (i == 1) {
+                            mainarray[i][j] = random.nextInt(6);
+                            mainarray[i + 1][j] = random.nextInt(6);
+                            mainarray[i + 2][j] = mainarray[i - 1][j];
+                        } else if (i == 2) {
+                            mainarray[i][j] = random.nextInt(6);
+                            mainarray[i + 1][j] = mainarray[i - 2][j];
+                            mainarray[i + 2][j] = mainarray[i - 1][j];
+                        } else {
+                            mainarray[i][j] = mainarray[i - 3][j];
+                            mainarray[i + 1][j] = mainarray[i - 2][j];
+                            mainarray[i + 2][j] = mainarray[i - 1][j];
+                            for (int r = i; r >= 3; r--) {
+                                System.out.println(r);
+                                mainarray[r][j] = mainarray[r - 3][j];
                             }
-                            System.out.println();
                         }
-                    }else
-                        same3=false;
+                            mainarray[0][j] = random.nextInt(6);
+                            mainarray[1][j] = random.nextInt(6);
+                            mainarray[2][j] = random.nextInt(6);
+
+                        System.out.println("coloumn int");
+                        same3 = true;
+
+                    } else
+                        same3 = false;
                 }
             }
 
 
         }
         System.out.println("final showing ");
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 5; j++) {
-                    System.out.print(mainarray[i][j] + " ");
-                }
-                System.out.println();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                System.out.print(mainarray[i][j] + " ");
             }
-
+            System.out.println();
         }
     }
+}
+
