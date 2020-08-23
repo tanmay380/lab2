@@ -39,7 +39,7 @@ public class game_match_3 {
                         System.out.println("row int");
                         same3 = true;
 
-                    } /*else if (i!=row-1) {
+                    } /*else if (i!=row-1) {//if you want adjacent checking too.. uncomment this.....for example ((0,0),(0,1),(1,0)) or ((3,3),(3,4),(4,3))
                         if (integer == mainarray[i][j + 1] && integer == mainarray[i + 1][j]) {
                             if (i != 0 && i!=1) {
                                 mainarray[i][j] = mainarray[i - 2][j];
@@ -62,7 +62,7 @@ public class game_match_3 {
                             same3 = true;
                         }
 
-                    } */ //if you want adjacent checking too.. uncomment this like ((0,0),(0,1),(1,0))
+                    } */ 
                     else
                         same3 = false;
 
